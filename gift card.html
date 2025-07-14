@@ -1,0 +1,151 @@
+<!-- This is a unified CSS + HTML structure for all four pages (index, service-users, non-service-users, thank-you)
+     Each page should have its own version but use this same CSS and animation logic -->
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Gift Card Offer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #d0f4ff, #e2ffe7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      animation: fadeIn 1.2s ease;
+      text-align: center;
+    }
+
+    h1 {
+      color: #007b5e;
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: #007b5e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #005f49;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎁$500 Gift Card</h1>
+  <p>Are you currently using our Internet service?</p>
+  <button onclick="location.href='service-users.html'">✅ Yes, I have taken the service</button>
+  <button onclick="location.href='non-service-users.html'">❌ No, I haven’t taken the service</button>
+</body>
+</html>
+
+
+<!-- service-users.html and non-service-users.html should follow similar structure but add this JS + Modal CSS for alerts -->
+<!-- Add this inside the <style> of both pages -->
+<style>
+  .modal-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007b5e;
+    color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+    z-index: 9999;
+    animation: popUp 0.6s ease;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  @keyframes popUp {
+    from { transform: scale(0.8) translate(-50%, -50%); opacity: 0; }
+    to { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+  }
+</style>
+
+<!-- Add this JS function inside <script> tag of both pages -->
+<script>
+  function showCustomAlert(message, redirectURL = null) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-alert';
+    modal.textContent = message;
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+      modal.remove();
+      if (redirectURL) window.location.href = redirectURL;
+    }, 2500);
+  }
+</script>
+
+<!-- Usage example inside form submit: -->
+<script>
+  function submitGiftForm() {
+    showCustomAlert("🏱 You are now registered in our Lucky Customer Gift Card! We will message you shortly.", 'thank-you.html');
+  }
+  function submitContactForm() {
+    showCustomAlert("📞 Our team will contact you within 1 hour to activate your service.", 'thank-you.html');
+  }
+</script>
+
+<!-- thank-you.html can be a simple animated thank you page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 100px;
+      background: #d0f0ff;
+      animation: fadeIn 1.5s ease;
+    }
+    h1 {
+      color: #007b5e;
+      font-size: 2.5em;
+    }
+    p {
+      font-size: 1.2em;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <p>We are providing up to $500 Gift Card to our lucky user</p>
+</body>
+</html>

